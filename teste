@@ -1,0 +1,51 @@
+//esse é um game loop mais simples e fácil para jogos pequenos, menor e mais fácil de entender
+public class Gameloop  implements Runnable{
+	
+	
+	
+	private boolean Isrunning;
+	private Thread thread;
+	
+	
+	public static void main(String args[]) {
+		
+		Gameloop gl = new Gameloop();
+		gl.start();
+	}
+	
+	public synchronized void start() {
+		Isrunning = true;
+		thread = new Thread(this);
+		thread.start();
+	}
+	
+	public void tick() {
+		System.out.println("tick");
+		//update
+	}
+	
+	
+	public void render() {
+		System.out.println("render");
+		//render
+	}
+	
+	
+	
+
+	@Override
+	public void run() {
+		while(Isrunning) {
+			tick();
+			render();
+			try {
+				thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
+}
